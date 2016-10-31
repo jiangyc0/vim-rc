@@ -16,13 +16,15 @@ set HOME=%USERPROFILE%
 set GIT_EXE=git.exe
 %GIT_EXE% --version >NUL 2>&1
 if "%ERRORLEVEL%" == "0" goto FIND_PYTHON_EXE
-else goto FAILED
+:: git not found
+goto FAILED
 
 :FIND_PYTHON_EXE
 set PYTHON_EXE=python.exe
 %PYTHON_EXE% --version >NUL 2>&1
 if %ERRORLEVEL% == "0" goto INIT
-else goto FAILED
+:: python not found
+goto FAILED
 
 :INIT
 set HOME_VIM=%HOME%\.vim\
@@ -65,3 +67,4 @@ echo require git and python support but you have not install...
 
 :FINISH
 echo finish...
+pause
