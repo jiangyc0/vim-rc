@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Vim</title>
+        <!--Material Design Lite-->
+        <link href="http://cdn.bootcss.com/material-design-lite/1.2.1/material.min.css" rel="stylesheet">
+        <script src="http://cdn.bootcss.com/material-design-lite/1.2.1/material.min.js"></script>
+        <link href="http://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
+        <!--Dialog Polyfill-->
+        <link href="http://cdn.bootcss.com/dialog-polyfill/0.4.4/dialog-polyfill.min.css" rel="stylesheet">
+        <script src="http://cdn.bootcss.com/dialog-polyfill/0.4.4/dialog-polyfill.min.js"></script>
+        <!--JQuery-->
+        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+        <!--High Light-->
+        <script src="http://cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+        <link href="http://cdn.bootcss.com/highlight.js/9.7.0/styles/monokai.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout">
+            <header class="mdl-layout__header mdl-layout__header-transparent">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <span class="mdl-layout-title">Vim - Vi Improved</span>
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Navigation -->
+                    <nav class="mdl-navigation">
+                        <a class="mdl-navigation__link" href="javascript:void(0)">About</a>
+                    </nav>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+            </div>
+            <main class="mdl-layout__content">
+                <div class="mdl-card mdl-shadow--4dp" style="margin: auto; margin-top:30px; width: 1000px">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title--text">Dependences</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        1、Git 
+                        <div>
+                        </div>
+                        2、Python
+                    </div>
+                </div>
+                <div class="mdl-card mdl-shadow--4dp" style="margin: auto; width: 1000px; margin-top:30px">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title--text">Usage</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        1、clone this repository
+                        <pre><code class="git">git clone https://github.com/jiangyc0/vim-rc.git</code></pre>
+                        2、rename .vim folder to ~/.vim
+                        <pre><code class="bash">move vim-rc\.vim\ %USERPROFILE%     # Windows</code></pre>
+                        <pre><code class="bash">mv vim-rc/.vim/    ~    # *nix</code></pre>
+                        3、rename .vimrc
+                        <pre><code class="bash">move vim-rc\.vimrc %USERPROFILE%\_vimrc      # windows</pre>
+                        <pre><code class="bash"> mv vim-rc/.vimrc ~             # *nix</code></pre>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $('pre code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            });
+        </script>
+    </body>
+</html>
