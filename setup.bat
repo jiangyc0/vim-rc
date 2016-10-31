@@ -18,7 +18,7 @@ set GIT_EXE=git.exe
 if "%ERRORLEVEL%" == "0" goto FIND_PYTHON_EXE
 else goto FAILED
 
-:FIND_PTHON_EXE
+:FIND_PYTHON_EXE
 set PYTHON_EXE=python.exe
 %PYTHON_EXE% --version >NUL 2>&1
 if %ERRORLEVEL% == "0" goto INIT
