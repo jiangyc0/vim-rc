@@ -7,6 +7,7 @@
 
 @rem Set local scope for the variables with windows NT shell
 if "%OS%"=="Windows_NT" setlocal
+@REM set APP_HOME and HOME variables
 set APP_HOME=%~dp0
 if "%APP_HOME%" == "" set APP_HOME=.
 if not defined USERPROFILE goto ERROR_NO_HOME_DEFINED
@@ -15,38 +16,32 @@ set HOME=%USERPROFILE%
 :FIND_GIT_EXE
 set GIT_EXE=git.exe
 %GIT_EXE% --version >NUL 2>&1
-if "%ERRORLEVEL%" == "0" goto FIND_PYTHON_EXE
+if "%ERRORLEVEL%"=="0" goto FIND_PYTHON_EXE
 :: git not found
-goto FAILED
+goto ERROR_NO_GIT
 
 :FIND_PYTHON_EXE
 set PYTHON_EXE=python.exe
 %PYTHON_EXE% --version >NUL 2>&1
-if %ERRORLEVEL% == "0" goto INIT
+if "%ERRORLEVEL%"=="0" goto INIT
 :: python not found
-goto FAILED
+goto ERROR_NO_PYTHON
 
 :INIT
-set HOME_VIM=%HOME%\.vim\
-set HOME_VIM_BAK=%HOME%\.vim.bak\
+set HOME_VIM=%HOME%\.vim
 set HOME_VIMRC=%HOME%\_vimrc
-set HOME_VIMRC_BAK=%HOME%\_vimrc.bak
-set TMP_VIM=%APP_HOME%\.vim\
-set TMP_VIMRC=%APP_HOME%\.vimrc
+set TMP_VIM=%APP_HOME%.vim
+set TMP_VIMRC=%APP_HOME%.vimrc
 
-if exist %HOME_VIM% (
-    :: rename .vim folder
-    if exist %HOME_VIM_BAK% goto ERROR_EXIST_VIM_BAK
-    else move "%HOME_VIM%" "%HOME_VIM_BAK%"
-)
-move %TMP_VIM% %HOME_VIM%
+if exist %HOME_VIM% goto ERROR_EXIST_VIM
+echo     move %TMP_VIM% to %HOME_VIM%
+move %TMP_VIM% %HOME%
 
-git clone https://github.com/VundleVim/Vundle.vim.git git clone https://github.com/VundleVim/Vundle.vim.git %HOME_VIM%bundle\Vundle.vim
+echo clone VundleVim to %HOME_VIM%\bundle\Vundle.vim
+git clone https://github.com/VundleVim/Vundle.vim.git %HOME_VIM%bundle\Vundle.vim
 
-if exist %HOME_VIMRC% (
-    if exist %HOME_VIMRC_BAK% goto ERROR_EXIST_VIMRC_BAK
-    else move %HOME_VIMRC% %HOME_VIMRC_BAK%
-)
+if exist %HOME_VIMRC% goto ERROR_EXIST_VIMRC
+echo     move %TMP_VIMRC% to %HOME_VIMRC%
 move %TMP_VIMRC% %HOME_VIMRC%
 
 echo setup finish, then we will start a vim instance, you can execute :PluginInstall command complate the installer
@@ -54,16 +49,25 @@ pause
 vim
 goto :FINISH
 
+:ERROR_NO_GIT
+echo must have git support...
+goto FINISH
+
+:ERROR_NO_PYTHON
+echo must have python support...
+goto FINISH
+
 :ERROR_NO_HOME_DEFINED
 echo no home variable defined...
 goto FINISH
 
-:ERROR_EXIST_VIM_BAK
-echo %HOME_VIM_BAK% has been exist...
+:ERROR_EXIST_VIM
+echo %HOME_VIM% has been exist...
 goto FINISH
 
-:FAILED
-echo require git and python support but you have not install...
+:ERROR_EXIST_VIMRC
+echo %HOME_VIMRC% has been exist...
+goto FINISH
 
 :FINISH
 echo finish...
